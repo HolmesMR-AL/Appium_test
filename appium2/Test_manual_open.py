@@ -13,6 +13,7 @@ desired_caps = dict(
 capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
 driver = webdriver.Remote('http://127.0.0.1:4723',options = capabilities_options)
 driver.implicitly_wait(5)
+driver.sleep(2)
 
 driver.find_element(AppiumBy.ACCESSIBILITY_ID,'Chrome').click()
 # driver.find_element(AppiumBy.ID,'com.google.android.dialer:id/one').click()
