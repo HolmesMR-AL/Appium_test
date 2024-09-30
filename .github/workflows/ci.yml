@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: |
           pip install Appium-Python-Client
+          apt update
+          apy install python3
+          python3 --version
 
       - name: Run Tests
         run: |
