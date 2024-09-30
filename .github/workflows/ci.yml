@@ -29,4 +29,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          python appium2/simpletest.py
+          python appium2/Test_manual_open.py
