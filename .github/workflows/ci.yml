@@ -40,7 +40,7 @@ jobs:
     - run: |
         npm install -g appium
         appium -v
-        appium &>/dev/null & --allow-insecure chromedriver_autodownload
+        appium &>/dev/null &
       name: Start Appium server
     - name: Run E2E Tests
       uses: reactivecircus/android-emulator-runner@v2
