@@ -27,15 +27,6 @@ time.sleep(3)
 driver.find_element(AppiumBy.XPATH, '//*[@data-testid="CrossIcon"]').click()
 driver.find_element(AppiumBy.XPATH, '//*[@data-testid="MenuIcon"]').click()
 time.sleep(2)
-# Select a button based on its text using UIAutomator
-# button_text = "Suppliers"
-# button = driver.find_element(
-#     AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{button_text}")'
-# )
-# button.click()
-# print(first_textview.text)
-
-time.sleep(2)
 
 video_rawdata = driver.stop_recording_screen()
 
