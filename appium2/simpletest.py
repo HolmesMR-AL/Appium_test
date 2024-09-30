@@ -14,6 +14,7 @@ desired_caps = dict(
 
 capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
 driver = webdriver.Remote("http://localhost:4723", options=capabilities_options)
+print("Driver is ready")
 # driver.start_recording_screen()
 driver.get("https://google.com")
 driver.implicitly_wait(5)
