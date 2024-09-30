@@ -13,7 +13,6 @@ jobs:
           -e EMULATOR_DEVICE="Samsung Galaxy S10" 
           -e WEB_VNC=true 
           -e APPIUM=true 
-          -e CHROME_ARGS="--allow-insecure chromedriver_autodownload"
           --device /dev/kvm
         ports:
           - 6080:6080
@@ -33,4 +32,4 @@ jobs:
           time: '60' # for 60 seconds
       - name: Run Tests
         run: |
-          python appium2/TestWebApp.py
+          python appium2/Test_manual_open.py
