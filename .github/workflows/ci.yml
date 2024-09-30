@@ -26,10 +26,10 @@ jobs:
       - name: Install dependencies
         run: |
           pip install Appium-Python-Client
-          apt update
-          apy install python3
           python3 --version
-
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '60' # for 60 seconds
       - name: Run Tests
         run: |
           python appium2/Test_manual_open.py
