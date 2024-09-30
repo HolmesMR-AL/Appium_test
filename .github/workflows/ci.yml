@@ -32,4 +32,4 @@ jobs:
           time: '60' # for 60 seconds
       - name: Run Tests
         run: |
-          python appium2/Test_manual_open.py
+          python appium2/TestWebApp.py

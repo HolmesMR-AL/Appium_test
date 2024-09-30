@@ -14,7 +14,7 @@ desired_caps = dict(
 
 capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
 driver = webdriver.Remote("http://localhost:4723", options=capabilities_options)
-# driver.start_recording_screen()
+driver.start_recording_screen()
 driver.get("https://develop.resourcezen.co.za")
 driver.implicitly_wait(5)
 driver.find_element(AppiumBy.XPATH, '//*[@name="email"]').send_keys("ross@al.co.za")
@@ -30,12 +30,11 @@ time.sleep(2)
 
 #comment for PR to test the workflow to master not main
 
+video_rawdata = driver.stop_recording_screen()
 
-# video_rawdata = driver.stop_recording_screen()
+video_name = driver.current_activity + time.strftime("%Y_%m_%d_%H%M%S")
 
-# video_name = driver.current_activity + time.strftime("%Y_%m_%d_%H%M%S")
+filepath = f"videos/{video_name}.mp4"
 
-# filepath = f"videos/{video_name}.mp4"
-
-# with open(filepath, "wb") as vd:
-#     vd.write(base64.b64decode(video_rawdata))
+with open(filepath, "wb") as vd:
+    vd.write(base64.b64decode(video_rawdata))
