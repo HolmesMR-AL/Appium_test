@@ -30,7 +30,6 @@ jobs:
       run: |
         sudo pip install --upgrade pip
         sudo pip install appium-python-client
-        npm install
         npm install -g appium
         appium driver doctor uiautomator2
     - name: Enable KVM group perms
