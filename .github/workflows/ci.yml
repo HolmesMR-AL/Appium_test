@@ -22,6 +22,14 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '17'
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install Appium
+      run: |
+        pip install -e
+        pip install appium-python-client
     - name: Enable KVM group perms
       run: |
         echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -38,7 +46,6 @@ jobs:
           ~/.android/adb*
         key: avd-30
     - run: |
-        npm install -g appium
         appium -v
         appium &>/dev/null &
       name: Start Appium server
