@@ -13,7 +13,7 @@ desired_caps = dict(
 )
 
 capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
-driver = webdriver.Remote("http://127.0.0.1:4723", options=capabilities_options)
+driver = webdriver.Remote("http://android-container:4723", options=capabilities_options)
 # driver.start_recording_screen()
 driver.get("https://develop.resourcezen.co.za")
 driver.implicitly_wait(5)

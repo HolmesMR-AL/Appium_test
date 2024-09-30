@@ -1,66 +1,31 @@
 name: appium Test
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
-  build:
+  runner-job:
     runs-on: ubuntu-latest
-
+    services:
+      android-container:
+        image: budtmo/docker-android:emulator_11.0
+        options: >-
+          -e EMULATOR_DEVICE="Samsung Galaxy S10" 
+          -e WEB_VNC=true 
+          -e APPIUM=true 
+          --device /dev/kvm
+        ports:
+          - 6080:6080
+          - 4723:4723
+          - 5555:5555
     steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v3
-      with:
-        node-version: lts/*
-        check-latest: true
-    - uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin'
-        java-version: '17'
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Enable KVM group perms
-      run: |
-        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
-        sudo udevadm control --reload-rules
-        sudo udevadm trigger --name-match=kvm
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-    - name: Install Appium
-      run: |
-        sudo pip install --upgrade pip
-        sudo pip install appium-python-client
-        npm install -g appium
-        appium driver doctor uiautomator2
-    - name: AVD cache
-      uses: actions/cache@v3
-      id: avd-cache
-      with:
-        path: |
-          ~/.android/avd/*
-          ~/.android/adb*
-        key: avd-30
-    - run: |
-        appium -v
-        appium &>/dev/null &
-      name: Start Appium server
-    - name: Run E2E Tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 30
-        target: google_apis
-        arch: x86_64
-        script: npm run test
-    - name: Upload Recording
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: Test Recording
-        path: testRecording.mp4
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          pip install Appium-Python-Client
+
+      - name: Run Tests
+        run: |
+          python appium2/TestWebApp.py
