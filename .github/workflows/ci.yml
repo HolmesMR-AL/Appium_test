@@ -28,4 +28,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          python appium2/TestWebApp.py
+          python appium2/simpletest.py
