@@ -28,7 +28,8 @@ driver.find_element(AppiumBy.XPATH, '//*[@data-testid="CrossIcon"]').click()
 driver.find_element(AppiumBy.XPATH, '//*[@data-testid="MenuIcon"]').click()
 time.sleep(2)
 
-#comment for PR to test the workflow
+#comment for PR to test the workflow to master not main
+
 
 video_rawdata = driver.stop_recording_screen()
 
