@@ -8,16 +8,18 @@ jobs:
     runs-on: ubuntu-latest
     services:
       android-container:
-        image: budtmo/docker-android:emulator_11.0 --allow-insecure chromedriver_autodownload
+        image: budtmo/docker-android:emulator_11.0
         options: >-
           -e EMULATOR_DEVICE="Samsung Galaxy S10" 
           -e WEB_VNC=true 
           -e APPIUM=true 
+          -e CHROME_ARGS="--allow-insecure chromedriver_autodownload"
           --device /dev/kvm
         ports:
           - 6080:6080
           - 4723:4723
           - 5555:5555
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
