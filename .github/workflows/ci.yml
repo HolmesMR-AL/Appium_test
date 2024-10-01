@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install Appium-Python-Client selenium
+          pip install Appium-Python-Client selenium pytest
 
       - name: Wait for the emulator to start
         uses: GuillaumeFalourd/wait-sleep-action@v1
