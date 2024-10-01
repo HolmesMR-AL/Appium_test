@@ -34,9 +34,9 @@ except NoSuchElementException:
 
 time.sleep(1)
 
-driver.find_element(AppiumBy.ID, "com.android.chrome:id/search_box_text").send_keys(
-    "Hello World"
-)
+# driver.find_element(AppiumBy.ID, "com.android.chrome:id/search_box_text").send_keys(
+#     "Hello World"
+# )
 
 # video_rawdata = driver.stop_recording_screen()
 
