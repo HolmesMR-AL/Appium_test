@@ -34,3 +34,24 @@ jobs:
       - name: Run Tests
         run: |
           python appium2/Test_manual_open.py
+      - name: Load test report history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gitHubTests
+          path: gitHubTests
+      - name: Build test report
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+          gh_pages: gitHubTests
+          allure_results: test-results/allure-results
+          allure_history: test-results/allure-history
+      - name: Publish test report
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gitHubTests
+          publish_dir: test-results/allure-history
