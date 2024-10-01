@@ -25,11 +25,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install Appium-Python-Client
-          python3 --version
-      - uses: GuillaumeFalourd/wait-sleep-action@v1
+          pip install Appium-Python-Client selenium
+
+      - name: Wait for the emulator to start
+        uses: GuillaumeFalourd/wait-sleep-action@v1
         with:
-          time: '60' # for 60 seconds
+          time: '45' # for 60 seconds
       - name: Run Tests
         run: |
           python appium2/Test_manual_open.py
