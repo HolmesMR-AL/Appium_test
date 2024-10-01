@@ -4,6 +4,7 @@ import time
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.webdriver.common.appiumby import AppiumBy
+from selenium.common.exceptions import NoSuchElementException
 
 desired_caps = dict(
     deviceName="Android", platformName="Android", automationName="UiAutomator2"
@@ -17,13 +18,19 @@ time.sleep(2)
 
 driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Chrome").click()
 
-if driver.find_element(AppiumBy.ID, "com.android.chrome:id/terms_accept"):
-    driver.find_element(AppiumBy.ID, "com.android.chrome:id/terms_accept").click()
+try:
+    terms_accept_button = driver.find_element(AppiumBy.ID, "com.android.chrome:id/terms_accept")
+    terms_accept_button.click()
+except NoSuchElementException:
+    pass
 
 time.sleep(1)
 
-if driver.find_element(AppiumBy.ID, "com.android.chrome:id/negative_button"):
-    driver.find_element(AppiumBy.ID, "com.android.chrome:id/negative_button").click()
+try:
+    negative_button = driver.find_element(AppiumBy.ID, "com.android.chrome:id/negative_button")
+    negative_button.click()
+except NoSuchElementException:
+    pass
 
 time.sleep(1)
 
