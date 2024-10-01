@@ -31,9 +31,11 @@ jobs:
         uses: GuillaumeFalourd/wait-sleep-action@v1
         with:
           time: '60' # for 60 seconds
+
       - name: Run Tests
         run: |
-          python appium2/Test_manual_open.py
+          pytest appium2/Test_manual_open.py
+
       - name: Load test report history
         uses: actions/checkout@v2
         if: always()
@@ -41,6 +43,7 @@ jobs:
         with:
           ref: gitHubTests
           path: gitHubTests
+
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
@@ -48,6 +51,7 @@ jobs:
           gh_pages: gitHubTests
           allure_results: test-results/allure-results
           allure_history: test-results/allure-history
+
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
