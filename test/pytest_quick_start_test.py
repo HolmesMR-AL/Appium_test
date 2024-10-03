@@ -1,4 +1,5 @@
 import allure
+import pytest
 
 pytestmark = [allure.epic("My first epic"), allure.feature("Quick start feature")]
 
@@ -22,4 +23,4 @@ def simple_step_func(param):
     with allure.step(f"function parameter: {param}"):
         pass
     with allure.step("Simple step inside test function"):
-        pass
+        pytest.fail("Failing test")

@@ -17,10 +17,17 @@ driver.find_element(AppiumBy.ID, "com.android.chrome:id/search_box_text").send_k
     "develop.resourcezen.co.za"
 )
 time.sleep(2)
-driver.find_element(AppiumBy.XPATH, '//android.widget.TextView[@resource-id="com.android.chrome:id/line_1" and @text="https://develop.resourcezen.co.za/home"]').click()
+driver.find_element(
+    AppiumBy.XPATH,
+    '//android.widget.TextView[@resource-id="com.android.chrome:id/line_1" and @text="https://develop.resourcezen.co.za/home"]',
+).click()
 time.sleep(4)
-driver.find_element(AppiumBy.XPATH, '//android.widget.EditText[@resource-id="email"]').send_keys("ross@al.co.za")
-driver.find_element(AppiumBy.XPATH, '//android.widget.EditText[@resource-id="password"]').send_keys("P@ssword2")
+driver.find_element(
+    AppiumBy.XPATH, '//android.widget.EditText[@resource-id="email"]'
+).send_keys("ross@al.co.za")
+driver.find_element(
+    AppiumBy.XPATH, '//android.widget.EditText[@resource-id="password"]'
+).send_keys("P@ssword2")
 time.sleep(3)
 driver.find_element(AppiumBy.XPATH, '//android.widget.Button[@text="LOG IN"]').click()
 time.sleep(3)
