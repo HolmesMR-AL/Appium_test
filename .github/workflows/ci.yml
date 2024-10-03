@@ -51,7 +51,7 @@ jobs:
         if: always()
         with:
           gh_pages: gitHubTests
-          allure_results: build/allure-results
+          allure_results: allure-results
           allure_history: allure-history
 
       - name: Publish test report
