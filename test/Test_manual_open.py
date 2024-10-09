@@ -50,3 +50,4 @@ def test_search_in_chrome():
     driver.find_element(AppiumBy.ID, "com.android.chrome:id/search_box_text").send_keys(
         "Hello World"
     )
+    allure.attach(driver.get_screenshot_as_png(), name="screenshot", attachment_type=allure.attachment_type.PNG)
