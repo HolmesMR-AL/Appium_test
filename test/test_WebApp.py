@@ -87,6 +87,11 @@ def test_sign_in():
         driver.find_element(AppiumBy.XPATH, "//form").click()
         time.sleep(2)
         driver.find_element(by=AppiumBy.XPATH, value="//form/button").click()
+        allure.attach(
+        driver.get_screenshot_as_png(),
+        name="sign-in",
+        attachment_type=allure.attachment_type.PNG,
+    )
 
 
 def test_close_modal():
