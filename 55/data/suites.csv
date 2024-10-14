@@ -1,0 +1,17 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Oct 14 11:50:05 GMT 2024","Mon Oct 14 11:50:07 GMT 2024","1739","test","test_WebApp","","","","Open Dashboard Menu","
+    Open the Customers page
+    "
+"failed","Mon Oct 14 11:49:23 GMT 2024","Mon Oct 14 11:49:23 GMT 2024","1","test","pytest_quick_start_test","","","","test_allure_simple_test displayName",""
+"passed","Mon Oct 14 11:49:23 GMT 2024","Mon Oct 14 11:49:32 GMT 2024","8436","test","test_WebApp","","","","Customer Table Test","
+    Open the ResourceZen website
+    "
+"broken","Mon Oct 14 11:49:41 GMT 2024","Mon Oct 14 11:50:05 GMT 2024","24265","test","test_WebApp","","","","test_close_modal","
+    close modal
+    "
+"passed","Mon Oct 14 11:49:32 GMT 2024","Mon Oct 14 11:49:41 GMT 2024","8868","test","test_WebApp","","","","test_sign_in","
+    Sign in to the application
+    "
+"broken","Mon Oct 14 11:50:07 GMT 2024","Mon Oct 14 11:50:23 GMT 2024","16123","test","test_WebApp","","","","Open Dashboard Menu","
+    Test that the form cannot be submitted without required fields
+    "
