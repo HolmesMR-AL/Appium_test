@@ -8,15 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        arrays: [
-          {device:"Samsung Galaxy S10", dir:"s10"}, 
-          {device:"Samsung Galaxy S9", dir:"s9"}
-          ]
+        config:
+          - device: "Samsung Galaxy S10"
+            dir: "s10"
+          - device: "Samsung Galaxy S9"
+            dir: "s9"
     services:
       android-container:
         image: budtmo/docker-android:emulator_11.0
         options: >-
-          -e EMULATOR_DEVICE="${{ matrix.arrays.device }}"
+          -e EMULATOR_DEVICE="${{ matrix.config.device }}"
           -e WEB_VNC=true 
           -e APPIUM=true 
           -e CHROMEDRIVER_AUTODOWNLOAD=true
@@ -44,7 +45,7 @@ jobs:
 
       - name: Run Test
         if: always()
-        run: python -m pytest --alluredir allure-results/${{ matrix.arrays.dir }}
+        run: python -m pytest --alluredir allure-results/${{ matrix.config.dir }}
         continue-on-error: true
   
       - name: Load test report history
@@ -53,15 +54,15 @@ jobs:
         continue-on-error: true
         with:
           ref: gitHubTests
-          path: report-history/${{ matrix.arrays.dir }}
+          path: report-history/${{ matrix.config.dir }}
   
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: ./report-history/${{ matrix.arrays.dir }}
-          allure_results: allure-results/${{ matrix.arrays.dir }}
-          allure_history: allure-history/${{ matrix.arrays.dir }}
+          gh_pages: ./report-history/${{ matrix.config.dir }}
+          allure_results: allure-results/${{ matrix.config.dir }}
+          allure_history: allure-history/${{ matrix.config.dir }}
   
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
@@ -69,7 +70,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gitHubTests
-          publish_dir: ./report-history/${{ matrix.arrays.dir }}
+          publish_dir: ./report-history/${{ matrix.config.dir }}
 
 
   # job-2:
