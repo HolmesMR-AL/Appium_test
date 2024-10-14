@@ -6,11 +6,15 @@ on:
 jobs:
   job-1:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device: ["Samsung Galaxy S10", "Samsung Galaxy S9"]
+        dir: ["Samsung-S10", "Samsung-S9"]
     services:
       android-container:
         image: budtmo/docker-android:emulator_11.0
         options: >-
-          -e EMULATOR_DEVICE="Samsung Galaxy S10"
+          -e EMULATOR_DEVICE="${{ matrix.device }}"
           -e WEB_VNC=true 
           -e APPIUM=true 
           -e CHROMEDRIVER_AUTODOWNLOAD=true
@@ -38,38 +42,33 @@ jobs:
 
       - name: Run Test
         if: always()
-        run: python -m pytest --alluredir allure-results/Samsung-S10
+        run: python -m pytest --alluredir allure-results/${{ matrix.dir }}
         continue-on-error: true
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          path: allure-results/Samsung-S10
-          name: allure-results/Samsung-S10
-
+  
       - name: Load test report history
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
         if: always()
         continue-on-error: true
         with:
           ref: gitHubTests
-          path: gitHubTests/report-history/Samsung-S10
-
+          path: report-history/${{ matrix.dir }}
+  
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: gitHubTests/report-history/Samsung-S10
-          allure_results: allure-results/Samsung-S10
-          allure_history: allure-history/Samsung-S10
-
+          gh_pages: ./report-history/${{ matrix.dir }}
+          allure_results: allure-results/${{ matrix.dir }}
+          allure_history: allure-history/${{ matrix.dir }}
+  
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gitHubTests
-          publish_dir: allure-history/Samsung-S10
+          publish_dir: ./report-history/${{ matrix.dir }}
+
 
   # job-2:
   #   runs-on: ubuntu-latest
