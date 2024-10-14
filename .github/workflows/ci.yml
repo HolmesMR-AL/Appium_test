@@ -49,90 +49,25 @@ jobs:
         continue-on-error: true
   
       - name: Load test report history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
           ref: gitHubTests
-          path: report-history/${{ matrix.config.dir }}
-  
+          path: gitHubTests
+
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: ./report-history/${{ matrix.config.dir }}
-          allure_results: allure-results/${{ matrix.config.dir }}
-          allure_history: allure-history/${{ matrix.config.dir }}
-  
+          gh_pages: gitHubTests
+          allure_history: allure-history
+          allure_results: build/allure-results
+
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gitHubTests
-          publish_dir: ./report-history/${{ matrix.config.dir }}
-
-
-  # job-2:
-  #   runs-on: ubuntu-latest
-  #   services:
-  #     android-container:
-  #       image: budtmo/docker-android:emulator_11.0
-  #       options: >-
-  #         -e EMULATOR_DEVICE="Samsung Galaxy S9" 
-  #         -e WEB_VNC=true 
-  #         -e APPIUM=true 
-  #         --device /dev/kvm
-  #       ports:
-  #         - 6080:6080
-  #         - 4723:4723
-  #         - 5555:5555
-
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-
-  #     - name: Install dependencies
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         pip install -r requirements.txt
-
-  #     - name: Wait for the emulator to start
-  #       uses: GuillaumeFalourd/wait-sleep-action@v1
-  #       with:
-  #         time: '60' # for 60 seconds
-
-  #     - name: Run Test
-  #       if: always()
-  #       run: python -m pytest --alluredir allure-results
-  #       continue-on-error: true
-
-  #     - name: Upload artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         path: allure-results
-  #         name: allure-results
-
-  #     - name: Load test report history
-  #       uses: actions/checkout@v4
-  #       if: always()
-  #       continue-on-error: true
-  #       with:
-  #         ref: gitHubTests
-  #         path: gitHubTests
-
-  #     - name: Build test report
-  #       uses: simple-elf/allure-report-action@v1.7
-  #       if: always()
-  #       with:
-  #         gh_pages: gitHubTests
-  #         allure_results: allure-results
-  #         allure_history: allure-history
-
-  #     - name: Publish test report
-  #       uses: peaceiris/actions-gh-pages@v3
-  #       if: always()
-  #       with:
-  #         github_token: ${{ secrets.GITHUB_TOKEN }}
-  #         publish_branch: gitHubTests
-  #         publish_dir: allure-history
+          publish_dir: allure-history
