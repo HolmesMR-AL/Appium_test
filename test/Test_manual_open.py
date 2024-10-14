@@ -12,12 +12,12 @@ desired_caps = dict(
 )
 
 capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
-driver = webdriver.Remote("http://127.0.0.1:4723", options=capabilities_options)
+driver = webdriver.Remote("http://localhost:4723", options=capabilities_options)
 driver.implicitly_wait(2)
 
 pytestmark = [allure.epic("Google Epic"), allure.feature("Manually open google")]
 
-@allure.id(2)
+@allure.id(1)
 @allure.story("Simple Google story")
 @allure.title("Simple Google Test")
 def test_open_chrome():

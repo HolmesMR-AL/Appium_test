@@ -12,3 +12,4 @@ docs/reference/
 site/
 .vscode/
 .history/
+.allure-results/
