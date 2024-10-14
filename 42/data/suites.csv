@@ -1,6 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"failed","Thu Oct 03 08:01:13 GMT 2024","Thu Oct 03 08:01:13 GMT 2024","1","test","pytest_quick_start_test","","","","test_allure_simple_test displayName",""
-"passed","Thu Oct 03 06:36:45 GMT 2024","Thu Oct 03 06:36:45 GMT 2024","528","test","Test_manual_open","","","","test_search_in_chrome",""
-"passed","Thu Oct 03 06:36:41 GMT 2024","Thu Oct 03 06:36:41 GMT 2024","86","test","Test_manual_open","","","","Simple Google Test",""
-"passed","Thu Oct 03 06:36:41 GMT 2024","Thu Oct 03 06:36:43 GMT 2024","2022","test","Test_manual_open","","","","test_accept_terms",""
-"passed","Thu Oct 03 06:36:43 GMT 2024","Thu Oct 03 06:36:45 GMT 2024","2019","test","Test_manual_open","","","","test_dismiss_negative_button",""
