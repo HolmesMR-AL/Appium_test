@@ -1,17 +1,17 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Mon Oct 14 12:05:30 GMT 2024","Mon Oct 14 12:05:37 GMT 2024","7421","test","test_WebApp","","","","Customer Table Test","
+"passed","Mon Oct 14 12:05:32 GMT 2024","Mon Oct 14 12:05:40 GMT 2024","8024","test","test_WebApp","","","","Customer Table Test","
     Open the ResourceZen website
     "
-"passed","Mon Oct 14 12:06:07 GMT 2024","Mon Oct 14 12:06:10 GMT 2024","2920","test","test_WebApp","","","","Open Dashboard Menu","
-    Open the Customers page
-    "
-"passed","Mon Oct 14 12:05:37 GMT 2024","Mon Oct 14 12:05:48 GMT 2024","11016","test","test_WebApp","","","","test_sign_in","
-    Sign in to the application
-    "
-"failed","Mon Oct 14 12:05:30 GMT 2024","Mon Oct 14 12:05:30 GMT 2024","2","test","pytest_quick_start_test","","","","test_allure_simple_test displayName",""
-"passed","Mon Oct 14 12:05:48 GMT 2024","Mon Oct 14 12:06:07 GMT 2024","18521","test","test_WebApp","","","","test_close_modal","
+"passed","Mon Oct 14 12:05:55 GMT 2024","Mon Oct 14 12:06:14 GMT 2024","18061","test","test_WebApp","","","","test_close_modal","
     close modal
     "
-"broken","Mon Oct 14 12:06:10 GMT 2024","Mon Oct 14 12:06:26 GMT 2024","16175","test","test_WebApp","","","","Open Dashboard Menu","
+"broken","Mon Oct 14 12:06:17 GMT 2024","Mon Oct 14 12:06:33 GMT 2024","16701","test","test_WebApp","","","","Open Dashboard Menu","
     Test that the form cannot be submitted without required fields
+    "
+"passed","Mon Oct 14 12:05:40 GMT 2024","Mon Oct 14 12:05:55 GMT 2024","15756","test","test_WebApp","","","","test_sign_in","
+    Sign in to the application
+    "
+"failed","Mon Oct 14 12:05:32 GMT 2024","Mon Oct 14 12:05:32 GMT 2024","1","test","pytest_quick_start_test","","","","test_allure_simple_test displayName",""
+"passed","Mon Oct 14 12:06:14 GMT 2024","Mon Oct 14 12:06:17 GMT 2024","3174","test","test_WebApp","","","","Open Dashboard Menu","
+    Open the Customers page
     "
