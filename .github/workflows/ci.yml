@@ -6,14 +6,11 @@ on:
 jobs:
   job-1:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        device: ["Samsung Galaxy S10", "Samsung Galaxy S9"]
     services:
       android-container:
         image: budtmo/docker-android:emulator_11.0
         options: >-
-          -e EMULATOR_DEVICE=${{ matrix.device }}
+          -e EMULATOR_DEVICE="Samsung Galaxy S10"
           -e WEB_VNC=true 
           -e APPIUM=true 
           -e CHROMEDRIVER_AUTODOWNLOAD=true
@@ -41,14 +38,14 @@ jobs:
 
       - name: Run Test
         if: always()
-        run: python -m pytest --alluredir allure-results/${{ matrix.device }}
+        run: python -m pytest --alluredir allure-results/Samsung-S10
         continue-on-error: true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          path: allure-results/${{ matrix.device }}
-          name: allure-results/${{ matrix.device }}
+          path: allure-results/Samsung-S10
+          name: allure-results/Samsung-S10
 
       - name: Load test report history
         uses: actions/checkout@v4
@@ -56,15 +53,15 @@ jobs:
         continue-on-error: true
         with:
           ref: gitHubTests
-          path: gitHubTests/report-history/${{ matrix.device }}
+          path: gitHubTests/report-history/Samsung-S10
 
       - name: Build test report
         uses: simple-elf/allure-report-action@v1.7
         if: always()
         with:
-          gh_pages: gitHubTests/report-history/${{ matrix.device }}
-          allure_results: allure-results/${{ matrix.device }}
-          allure_history: allure-history/${{ matrix.device }}
+          gh_pages: gitHubTests/report-history/Samsung-S10
+          allure_results: allure-results/Samsung-S10
+          allure_history: allure-history/Samsung-S10
 
       - name: Publish test report
         uses: peaceiris/actions-gh-pages@v3
@@ -72,7 +69,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gitHubTests
-          publish_dir: allure-history/${{ matrix.device }}
+          publish_dir: allure-history/Samsung-S10
 
   # job-2:
   #   runs-on: ubuntu-latest
