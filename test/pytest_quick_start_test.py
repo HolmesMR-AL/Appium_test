@@ -1,7 +1,7 @@
 import allure
 import pytest
 
-pytestmark = [allure.epic("My first epic"), allure.feature("Quick start feature")]
+pytestmark = [allure.epic("Failure Example"), allure.feature("Quick start feature")]
 
 
 @allure.id(1)
