@@ -1,0 +1,8 @@
+"Epic","Feature","Story","FAILED","BROKEN","PASSED","SKIPPED","UNKNOWN"
+"JobCard Epic","Test JobCard","","0","0","2","0","0"
+"Suppliers Epic","Test Suppliers Table","","0","1","3","0","0"
+"Customers Epic","Test Customers Table","Customer Table Story","0","0","1","0","0"
+"JobCard Epic","Test JobCard","JobCard Story","0","0","1","0","0"
+"Customers Epic","Test Customers Table","","0","1","2","0","0"
+"Failure Example","Quick start feature","Simple story","1","0","0","0","0"
+"Suppliers Epic","Test Suppliers Table","Supplier Table Story","0","0","1","0","0"
