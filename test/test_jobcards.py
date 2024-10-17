@@ -2,10 +2,6 @@ import time
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.actions.action_builder import ActionBuilder
-from selenium.webdriver.common.actions.pointer_input import PointerInput
-from selenium.webdriver.common.actions import interaction
 
 pytestmark = [allure.epic("JobCard Epic"), allure.feature("Test JobCard")]
 
