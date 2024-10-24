@@ -12,4 +12,5 @@ docs/reference/
 site/
 .vscode/
 .history/
-.allure-results/
+allure-results/
+test/__pycache__/

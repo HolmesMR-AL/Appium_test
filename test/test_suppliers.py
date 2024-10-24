@@ -1,5 +1,4 @@
 import time
-
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
@@ -7,7 +6,7 @@ from selenium.common.exceptions import NoSuchElementException
 pytestmark = [allure.epic("Suppliers Epic"), allure.feature("Test Suppliers Table")]
 
 
-@allure.id(2)
+@allure.id(3)
 @allure.story("Supplier Table Story")
 @allure.title("ResourceZen Home")
 def test_open(appium_driver):
@@ -19,59 +18,16 @@ def test_open(appium_driver):
         time.sleep(4)
 
 
-@allure.title("Sign In")
-def test_sign_in(appium_driver):
-    """
-    Sign in to the application if not automatically logged in
-    """
-    try:
-        with allure.step("Sign in"):
-            appium_driver.find_element(
-                AppiumBy.XPATH, '//input[@name="email"]'
-            ).send_keys("ross@al.co.za")
-            appium_driver.find_element(
-                AppiumBy.XPATH, '//input[@name="password"]'
-            ).send_keys("P@ssword2")
-            appium_driver.find_element(AppiumBy.XPATH, "//form").click()
-            time.sleep(2)
-            appium_driver.find_element(by=AppiumBy.XPATH, value="//form/button").click()
-            allure.attach(
-                appium_driver.get_screenshot_as_png(),
-                name="sign-in",
-                attachment_type=allure.attachment_type.PNG,
-            )
-    except NoSuchElementException:
-        pass
-
-
-@allure.title("Supplier Table Test")
-def test_close_modal(appium_driver):
-    """
-    close modal
-    """
-    with allure.step("close modal"):
-        time.sleep(3)
-        appium_driver.find_element(
-            by=AppiumBy.XPATH,
-            value='//button[@aria-label="view"]',
-        ).click()
-        time.sleep(3)
-        appium_driver.find_element(
-            by=AppiumBy.XPATH, value="//button[@data-testid='modal-close']"
-        ).click()
-
-
 @allure.title("Open Dashboard Menu")
 def test_open_menu_then_suppliers(appium_driver):
     """
     Open the Suppliers page
     """
     with allure.step("Open menu"):
-        appium_driver.find_element(
-            by=AppiumBy.XPATH, value="//header/div/button"
-        ).click()
+        appium_driver.find_element(AppiumBy.XPATH, "//header/div/button").click()
         time.sleep(1)
-        appium_driver.find_element(by=AppiumBy.XPATH, value="//ul/div[5]").click()
+        appium_driver.find_element(AppiumBy.XPATH, "//ul/div[5]").click()
+        time.sleep(3)
 
 
 @allure.title("Open Dashboard Menu")
@@ -80,25 +36,34 @@ def test_cannot_submit_form(appium_driver):
     Test that the form cannot be submitted without required fields
     """
     with allure.step("Open form"):
-        try:
-            appium_driver.find_element(
-                by=AppiumBy.XPATH,
-                value='//android.widget.Button[@text="CREATE SUPPLIER"]',
-            ).click()
-        except NoSuchElementException:
-            pass
-
-        time.sleep(1)
-    with allure.step("Submit form"):
         appium_driver.find_element(
-            by=AppiumBy.XPATH, value="//button[@id='submit']"
+            AppiumBy.XPATH,
+            '//button[contains(text(), "reate")]',
         ).click()
+
+        time.sleep(2)
+    with allure.step("Submit form"):
+        appium_driver.execute_script(
+            "mobile: swipeGesture",
+            {
+                "left": 500,
+                "top": 300,
+                "width": 200,
+                "height": 1000,
+                "direction": "up",
+                "percent": 0.75,
+            },
+        )
+        time.sleep(2)
+        appium_driver.find_element(AppiumBy.XPATH, '//button[text()="Submit"]').click()
+        time.sleep(2)
+        allure.attach(
+            appium_driver.get_screenshot_as_png(),
+            name="full-page",
+            attachment_type=allure.attachment_type.PNG,
+        )
         appium_driver.find_elements(
             AppiumBy.ID,
-            "suppliers_name-helper-text",
+            "supplier_name-helper-text",
         )
-    allure.attach(
-        appium_driver.get_screenshot_as_png(),
-        name="full-page",
-        attachment_type=allure.attachment_type.PNG,
-    )
+        time.sleep(2)

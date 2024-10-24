@@ -1,4 +1,5 @@
 import pytest
+import time
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
 
@@ -18,7 +19,7 @@ def appium_driver(request):
     )
     capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
     driver = webdriver.Remote("http://localhost:4723", options=capabilities_options)
-    driver.implicitly_wait(15)
+    driver.implicitly_wait(10)
 
     def fin():
         driver.quit()
