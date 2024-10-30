@@ -1,5 +1,6 @@
 import time
 import allure
+import pytest
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
 
@@ -17,7 +18,6 @@ def test_open(appium_driver):
         appium_driver.get("https://develop.resourcezen.co.za/home")
         time.sleep(3)
 
-
 def test_close_modal(appium_driver):
     """
     open JobCard view modal and close it
@@ -26,7 +26,7 @@ def test_close_modal(appium_driver):
         time.sleep(3)
         appium_driver.find_element(
             AppiumBy.XPATH,
-            '//button[@aria-label="view"]',
+            '//button[@aria-label="vie"]',
         ).click()
         time.sleep(3)
         allure.attach(

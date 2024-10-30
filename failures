@@ -1,0 +1,4 @@
+test/test_customers.py::test_open_menu_then_customers
+test/test_customers.py::test_cannot_submit_form
+test/test_customers.py::test_open_menu_then_customers
+test/test_customers.py::test_cannot_submit_form

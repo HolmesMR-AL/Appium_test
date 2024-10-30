@@ -1,29 +1,39 @@
 import time
+import pytest
 import allure
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.common.exceptions import NoSuchElementException
+
+
+@pytest.fixture
+def screenshot_on_failure(request, appium_driver):
+    """
+        Takes a screenshot on test failure and attaches it to the allure report
+    """
+    yield
+    if request.node.rep_call.failed:
+        allure.attach(
+            appium_driver.get_screenshot_as_png(),
+            name="screenshot",
+            attachment_type=allure.attachment_type.PNG,
+        )
+
 
 pytestmark = [allure.epic("Customers Epic"), allure.feature("Test Customers Table")]
 
 
 @allure.id(1)
-@allure.story("Customer Table Story")
-@allure.title("Customer Table Test")
+@allure.story("Login and open the Customers page")
+@allure.title("Connect to Home Page")
+@pytest.mark.usefixtures("screenshot_on_failure")
 def test_open(appium_driver):
     """
     Open the ResourceZen website
     """
-    with allure.step("Open ResourceZen"):
+    with allure.step("Open ResourceZen and login"):
         appium_driver.get("https://develop.resourcezen.co.za/home")
         time.sleep(4)
-
-
-def test_sign_in(appium_driver):
-    """
-    Sign in to the application if not automatically logged in
-    """
-    try:
-        with allure.step("Sign in"):
+        try:
             appium_driver.find_element(
                 AppiumBy.XPATH, '//input[@name="email"]'
             ).send_keys("ross@al.co.za")
@@ -33,16 +43,12 @@ def test_sign_in(appium_driver):
             appium_driver.find_element(AppiumBy.XPATH, "//form").click()
             time.sleep(2)
             appium_driver.find_element(AppiumBy.XPATH, "//form/button").click()
-            allure.attach(
-                appium_driver.get_screenshot_as_png(),
-                name="sign-in",
-                attachment_type=allure.attachment_type.PNG,
-            )
-    except NoSuchElementException:
-        pass
+        except NoSuchElementException:
+            pass
 
-
-@allure.title("Open Dashboard Menu")
+@allure.story("Login and open the Customers page")
+@allure.title("Open the Customers page")
+@pytest.mark.usefixtures("screenshot_on_failure")
 def test_open_menu_then_customers(appium_driver):
     """
     Open the Customers page
@@ -54,7 +60,9 @@ def test_open_menu_then_customers(appium_driver):
         time.sleep(3)
 
 
-@allure.title("Open Dashboard Menu")
+@allure.story("Test the create modal submissions")
+@allure.title("Test the create modal")
+@pytest.mark.usefixtures("screenshot_on_failure")
 def test_cannot_submit_form(appium_driver):
     """
     Test that the form cannot be submitted without required fields
@@ -64,7 +72,6 @@ def test_cannot_submit_form(appium_driver):
             AppiumBy.XPATH,
             '//button[contains(text(), "reate")]',
         ).click()
-
         time.sleep(5)
     with allure.step("Submit form"):
         appium_driver.execute_script(
@@ -80,12 +87,39 @@ def test_cannot_submit_form(appium_driver):
         )
         time.sleep(2)
         appium_driver.find_element(AppiumBy.XPATH, '//button[text()="Submit"]').click()
-        allure.attach(
-            appium_driver.get_screenshot_as_png(),
-            name="full-page",
-            attachment_type=allure.attachment_type.PNG,
+        appium_driver.find_element(
+            AppiumBy.XPATH,
+            '//p[@id="customer_display_name-helper-text"]',
         )
-        appium_driver.find_elements(
-            AppiumBy.ID,
-            "customer_display_name-helper-text",
+
+@allure.story("Test the create modal submissions")
+@allure.title("Test the create modal")
+@pytest.mark.usefixtures("screenshot_on_failure")
+def test_can_submit_form(appium_driver):
+    """
+    Test that the form can be submitted and the snackbar is working
+    """
+    with allure.step("Open form"):
+        appium_driver.find_element(
+            AppiumBy.XPATH,
+            '//button[contains(text(), "reate")]',
+        ).click()
+        time.sleep(5)
+    with allure.step("Submit form"):
+        appium_driver.execute_script(
+            "mobile: swipeGesture",
+            {
+                "left": 500,
+                "top": 300,
+                "width": 200,
+                "height": 1000,
+                "direction": "up",
+                "percent": 0.75,
+            },
+        )
+        time.sleep(2)
+        appium_driver.find_element(AppiumBy.XPATH, '//button[text()="Submit"]').click()
+        appium_driver.find_element(
+            AppiumBy.XPATH,
+            '//p[@id="customer_display_name-helper-text"]',
         )

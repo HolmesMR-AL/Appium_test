@@ -11,7 +11,7 @@ pytestmark = [allure.epic("Suppliers Epic"), allure.feature("Test Suppliers Tabl
 @allure.title("ResourceZen Home")
 def test_open(appium_driver):
     """
-    Open the ResourceZen website
+    Open the ResourceZen home page
     """
     with allure.step("Open ResourceZen"):
         appium_driver.get("https://develop.resourcezen.co.za/home")
@@ -62,8 +62,8 @@ def test_cannot_submit_form(appium_driver):
             name="full-page",
             attachment_type=allure.attachment_type.PNG,
         )
-        appium_driver.find_elements(
-            AppiumBy.ID,
-            "supplier_name-helper-text",
+        appium_driver.find_element(
+            AppiumBy.XPATH,
+            '//p[@id="supplier_name-helper-text"]',
         )
         time.sleep(2)
