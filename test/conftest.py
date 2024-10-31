@@ -1,6 +1,7 @@
 import pytest
 from appium import webdriver
 from appium.options.android import UiAutomator2Options
+from appium.webdriver.common.appiumby import AppiumBy
 
 @pytest.fixture(scope="session")
 def appium_driver(request):
@@ -19,6 +20,7 @@ def appium_driver(request):
     capabilities_options = UiAutomator2Options().load_capabilities(desired_caps)
     driver = webdriver.Remote("http://localhost:4723", options=capabilities_options)
     driver.implicitly_wait(10)
+    # driver.find_element(AppiumBy.ACCESSIBILITY_ID, "Chrome").click()
 
     def fin():
         driver.quit()

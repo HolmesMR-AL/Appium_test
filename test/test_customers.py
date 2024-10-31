@@ -42,21 +42,21 @@ def test_open(appium_driver):
             ).send_keys("P@ssword2")
             appium_driver.find_element(AppiumBy.XPATH, "//form").click()
             time.sleep(2)
-            appium_driver.find_element(AppiumBy.XPATH, "//form/button").click()
+            appium_driver.find_element(AppiumBy.XPATH, '//button[@id="login"]').click()
+            time.sleep(4)
         except NoSuchElementException:
             pass
 
 @allure.story("Login and open the Customers page")
 @allure.title("Open the Customers page")
-@pytest.mark.usefixtures("screenshot_on_failure")
 def test_open_menu_then_customers(appium_driver):
     """
     Open the Customers page
     """
     with allure.step("Open menu"):
-        appium_driver.find_element(AppiumBy.XPATH, "//header/div/button").click()
+        appium_driver.find_element(AppiumBy.XPATH, '//button[@aria-label="open drawer"]').click()
         time.sleep(1)
-        appium_driver.find_element(AppiumBy.XPATH, "//ul/div[6]").click()
+        appium_driver.find_element(AppiumBy.XPATH, '//div[@id="Customers"]').click()
         time.sleep(3)
 
 
@@ -70,7 +70,7 @@ def test_cannot_submit_form(appium_driver):
     with allure.step("Open form"):
         appium_driver.find_element(
             AppiumBy.XPATH,
-            '//button[contains(text(), "reate")]',
+            '//button[@id="create-customer-button"]',
         ).click()
         time.sleep(5)
     with allure.step("Submit form"):
@@ -102,9 +102,13 @@ def test_can_submit_form(appium_driver):
     with allure.step("Open form"):
         appium_driver.find_element(
             AppiumBy.XPATH,
-            '//button[contains(text(), "reate")]',
+            '//button[@id="create-customer-button"]',
         ).click()
         time.sleep(5)
+        appium_driver.find_element(
+            AppiumBy.XPATH,
+            '//input[@id="customer_display_name"]',
+        ).send_keys("Test Customer")
     with allure.step("Submit form"):
         appium_driver.execute_script(
             "mobile: swipeGesture",

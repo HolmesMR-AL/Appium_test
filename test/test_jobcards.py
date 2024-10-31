@@ -26,7 +26,7 @@ def test_close_modal(appium_driver):
         time.sleep(3)
         appium_driver.find_element(
             AppiumBy.XPATH,
-            '//button[@aria-label="vie"]',
+            '//button[@aria-label="view"]',
         ).click()
         time.sleep(3)
         allure.attach(

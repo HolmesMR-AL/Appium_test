@@ -24,9 +24,9 @@ def test_open_menu_then_suppliers(appium_driver):
     Open the Suppliers page
     """
     with allure.step("Open menu"):
-        appium_driver.find_element(AppiumBy.XPATH, "//header/div/button").click()
+        appium_driver.find_element(AppiumBy.XPATH, '//button[@aria-label="open drawer"]').click()
         time.sleep(1)
-        appium_driver.find_element(AppiumBy.XPATH, "//ul/div[5]").click()
+        appium_driver.find_element(AppiumBy.XPATH, '//div[@id="Suppliers"]').click()
         time.sleep(3)
 
 
@@ -38,7 +38,7 @@ def test_cannot_submit_form(appium_driver):
     with allure.step("Open form"):
         appium_driver.find_element(
             AppiumBy.XPATH,
-            '//button[contains(text(), "reate")]',
+            '//button[@id="create-supplier-button"]',
         ).click()
 
         time.sleep(2)
