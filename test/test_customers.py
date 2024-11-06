@@ -49,6 +49,7 @@ def test_open(appium_driver):
 
 @allure.story("Login and open the Customers page")
 @allure.title("Open the Customers page")
+@pytest.mark.usefixtures("screenshot_on_failure")
 def test_open_menu_then_customers(appium_driver):
     """
     Open the Customers page
@@ -98,18 +99,13 @@ def test_cannot_submit_form(appium_driver):
 def test_can_submit_form(appium_driver):
     """
     Test that the form can be submitted and the snackbar is working
-    """
-    with allure.step("Open form"):
-        appium_driver.find_element(
-            AppiumBy.XPATH,
-            '//button[@id="create-customer-button"]',
-        ).click()
-        time.sleep(5)
+    """        
+    with allure.step("Submit form"):
+        time.sleep(2)
         appium_driver.find_element(
             AppiumBy.XPATH,
             '//input[@id="customer_display_name"]',
         ).send_keys("Test Customer")
-    with allure.step("Submit form"):
         appium_driver.execute_script(
             "mobile: swipeGesture",
             {
@@ -118,12 +114,10 @@ def test_can_submit_form(appium_driver):
                 "width": 200,
                 "height": 1000,
                 "direction": "up",
-                "percent": 0.75,
+                "percent": 1,
             },
         )
         time.sleep(2)
         appium_driver.find_element(AppiumBy.XPATH, '//button[text()="Submit"]').click()
-        appium_driver.find_element(
-            AppiumBy.XPATH,
-            '//p[@id="customer_display_name-helper-text"]',
-        )
+        time.sleep(3)
+        appium_driver.find_element(AppiumBy.XPATH, '//div[@role="alert"]')

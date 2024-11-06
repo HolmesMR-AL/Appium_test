@@ -6,7 +6,19 @@ from selenium.common.exceptions import NoSuchElementException
 
 pytestmark = [allure.epic("JobCard Epic"), allure.feature("Test JobCard")]
 
-
+@pytest.fixture
+def screenshot_on_failure(request, appium_driver):
+    """
+        Takes a screenshot on test failure and attaches it to the allure report
+    """
+    yield
+    if request.node.rep_call.failed:
+        allure.attach(
+            appium_driver.get_screenshot_as_png(),
+            name="screenshot",
+            attachment_type=allure.attachment_type.PNG,
+        )
+        
 @allure.id(2)
 @allure.story("JobCard Story")
 @allure.title("JobCardTest")
